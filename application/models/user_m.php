@@ -42,6 +42,36 @@ class user_m extends CI_Model
             ],
         ];
     }
+    public function rules_update()
+    {
+        return [
+            [
+                'field' => 'fnama_user',
+                'label' => 'Nama Lengkap',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fdepartemen',
+                'label' => 'Departemen',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'frole',
+                'label' => 'Role',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fusername',
+                'label' => 'Username',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fpassword',
+                'label' => 'Password',
+                'rules' => 'required'
+            ],
+        ];
+    }
 
     public function get_all()
     {
@@ -82,7 +112,7 @@ class user_m extends CI_Model
         $this->id_departemen = $post['fdepartemen'];
         $this->role = $post['frole'];
         $this->username = $post['fusername'];
-        $this->password = md5($post['fpassword']);
+        $this->password = $post['fpassword'];
         $this->deleted = 0;
         $this->db->update($this->_table, $this, array('id_user' => $post['fid_user']));
     }

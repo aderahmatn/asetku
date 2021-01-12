@@ -56,12 +56,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar -->
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3  d-flex">
           <div class="image">
-            <img src="<?= base_url('assets/images/user.jpg') ?>" class="img-circle" alt="User Image">
+            <img src="<?= base_url('assets/images/user.jpg') ?>" class="img-circle mt-3" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Ade Rahmat</a>
+            <a href="#" class="d-block"><?= ucwords($this->session->userdata('nama_lengkap')) ?> </a>
+            <p><span class="mb-0 badge badge-light"><?= ucwords($this->session->userdata('role')) ?></span>
+              <span class="mb-0 badge badge-light"><?= $this->session->userdata('departemen') ?></span></p>
           </div>
         </div>
 
@@ -95,36 +97,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
             </li>
 
-
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link <?= $this->uri->segment(1) == 'user' ? 'active' : '' ?><?= $this->uri->segment(1) == 'aset' ? 'active' : '' ?><?= $this->uri->segment(1) == 'departemen' ? 'active' : '' ?>">
-                <i class="nav-icon fas fa-database"></i>
-                <p>
-                  Data Master
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="<?= base_url('aset') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'aset' ? 'active' : '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Aset</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url('user') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'user' ? 'active' : '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data User</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?= base_url('departemen') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'departemen' ? 'active' : '' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Departemen</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            <?php if ($this->session->userdata('role') == 'admin') { ?>
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'user' ? 'active' : '' ?><?= $this->uri->segment(1) == 'device' ? 'active' : '' ?><?= $this->uri->segment(1) == 'departemen' ? 'active' : '' ?><?= $this->uri->segment(1) == 'kategori' ? 'active' : '' ?>">
+                  <i class="nav-icon fas fa-database"></i>
+                  <p>
+                    Data Master
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="<?= base_url('device') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'device' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Device</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= base_url('kategori') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'kategori' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Kategori</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= base_url('user') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'user' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data User</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<?= base_url('departemen') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'departemen' ? 'active' : '' ?>">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Data Departemen</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            <?php } ?>
             <li class="nav-item">
               <a href="<?= base_url('setting') ?>" class="nav-link <?= $this->uri->segment(1) == 'setting' ? 'active' : '' ?>">
                 <i class="nav-icon fas fa-user-cog"></i>
@@ -209,7 +218,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn  btn-secondary" data-dismiss="modal">Batal</button>
-        <button type="button" class="btn  btn-danger">Logout</button>
+        <a type="button" class="btn  btn-danger" href="<?= site_url('auth/logout') ?>">Logout</a>
       </div>
     </div>
     <!-- /.modal-content -->

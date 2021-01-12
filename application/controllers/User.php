@@ -60,7 +60,6 @@ class User extends CI_Controller
         $user = $this->user_m;
         $validation = $this->form_validation;
         $validation->set_rules($user->rules_update());
-
         if ($this->form_validation->run()) {
             $post = $this->input->post(null, TRUE);
             $this->user_m->update($post);
@@ -73,6 +72,7 @@ class User extends CI_Controller
             }
         }
         $data['user'] = $this->user_m->get_by_id($id);
+        $data['departemen'] = $this->departemen_m->get_all();
         if (!$data['user']) {
             $this->session->set_flashdata('error', 'Data User Tidak ditemukan!');
             redirect('user', 'refresh');
