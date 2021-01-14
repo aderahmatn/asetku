@@ -73,8 +73,10 @@
                                                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail<?= $key->id_permintaan ?>" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye" data-tolltip="tooltip" data-placement="top" title="Detail"></i></button>
 
                                                 <?php if ($this->session->userdata('role') == 'user') { ?>
-                                                    <a href="<?= base_url('permintaan/edit/') . $key->id_permintaan ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
-                                                    <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'permintaan/delete/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                                    <?php if ($key->status_permintaan == 'hold') { ?>
+                                                        <a href="<?= base_url('permintaan/edit/') . $key->id_permintaan ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
+                                                        <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'permintaan/delete/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                                    <?php } ?>
                                                 <?php } ?>
                                                 <?php if ($key->approve == 0) { ?>
                                                     <?php if ($this->session->userdata('role') == 'manager') { ?>

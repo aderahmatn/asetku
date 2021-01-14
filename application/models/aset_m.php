@@ -46,6 +46,18 @@ class aset_m extends CI_Model
             ],
         ];
     }
+    public function get_by_dept()
+    {
+        $this->db->select('*');
+        $this->db->join('detail_aset', 'detail_aset.id_aset = aset.id_aset', 'left');
+        $this->db->join('permintaan', 'permintaan.id_permintaan = detail_aset.id_permintaan', 'left');
+        $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen', 'left');
+        $this->db->from($this->_table);
+        $this->db->where('aset.deleted', 0);
+        $this->db->where('permintaan.id_departemen', $this->session->userdata('id_departemen'));
+        $query = $this->db->get();
+        return $query->result();
+    }
     public function get_all()
     {
         $this->db->select('aset.*, kategori.*, permintaan.*, user.*, departemen.*, detail_aset.tanggal');

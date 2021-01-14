@@ -33,7 +33,7 @@ class Departemen extends CI_Controller
     }
     public function edit($id = null)
     {
-        if (!isset($id)) redirect('alat');
+        if (!isset($id)) redirect('departemen');
         $departemen  = $this->departemen_m;
         $validation = $this->form_validation;
         $validation->set_rules($departemen->rules());
