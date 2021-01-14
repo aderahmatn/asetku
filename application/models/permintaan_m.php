@@ -37,11 +37,11 @@ class permintaan_m extends CI_Model
     }
     public function get_all_approved()
     {
-        $this->db->select('*');
+        $this->db->select('permintaan.*,aset.*, user.*, departemen.*');
         $this->db->join('user', 'user.id_user = permintaan.id_user');
-        $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen');
-        $this->db->join('detail_aset', 'detail_aset.id_permintaan = permintaan.id_permintaan');
-        $this->db->join('aset', 'aset.id_aset = detail_aset.id_aset');
+        $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen', 'left');
+        $this->db->join('detail_aset', 'detail_aset.id_permintaan = permintaan.id_permintaan', 'left');
+        $this->db->join('aset', 'aset.id_aset = detail_aset.id_aset', 'left');
         $this->db->from($this->_table);
         $this->db->where('permintaan.deleted', 0);
         $this->db->where('permintaan.status_permintaan!=',  'hold');

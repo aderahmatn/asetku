@@ -77,11 +77,8 @@
                                                     <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'permintaan/delete/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                                 <?php } ?>
                                                 <?php if ($key->approve == 0) { ?>
-
                                                     <?php if ($this->session->userdata('role') == 'manager') { ?>
-
                                                         <button type="button" class="btn btn-default btn-sm" onclick="approveConfirm('<?= base_url() . 'permintaan/approve/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Approve"><i class="fas fa-check"></i></button>
-
                                                     <?php  } ?>
                                                 <?php  } ?>
                                             </div>
@@ -202,7 +199,7 @@
                     </div>
                     <div class="col-9 pt-2">
                         <h5>Apakah anda yakin?</h5>
-                        <span>Anda akan menyutujui permintaan ini!</span>
+                        <span>Data yang dihapus tidak akan bisa dikembalikan.</span>
                     </div>
                 </div>
 
@@ -225,7 +222,7 @@
                     </div>
                     <div class="col-9 pt-2">
                         <h5>Apakah anda yakin?</h5>
-                        <span>Data yang dihapus tidak akan bisa dikembalikan.</span>
+                        <span>akan approve permintaan ini!</span>
                     </div>
                 </div>
 
