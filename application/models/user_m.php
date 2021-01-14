@@ -12,6 +12,7 @@ class user_m extends CI_Model
     public $role;
     public $username;
     public $password;
+    public $nik;
     public function rules()
     {
         return [
@@ -39,6 +40,11 @@ class user_m extends CI_Model
                 'field' => 'fpassword',
                 'label' => 'Password',
                 'rules' => 'required'
+            ],
+            [
+                'field' => 'fnik',
+                'label' => 'NIK',
+                'rules' => 'required|numeric'
             ],
         ];
     }
@@ -70,6 +76,11 @@ class user_m extends CI_Model
                 'label' => 'Password',
                 'rules' => 'required'
             ],
+            [
+                'field' => 'fnik',
+                'label' => 'NIK',
+                'rules' => 'required|numeric'
+            ],
         ];
     }
 
@@ -94,6 +105,7 @@ class user_m extends CI_Model
         $this->id_departemen = $post['fdepartemen'];
         $this->role = $post['frole'];
         $this->username = $post['fusername'];
+        $this->nik = $post['fnik'];
         $this->password = md5($post['fpassword']);
         $this->deleted = 0;
         $this->db->insert($this->_table, $this);
@@ -112,6 +124,7 @@ class user_m extends CI_Model
         $this->id_departemen = $post['fdepartemen'];
         $this->role = $post['frole'];
         $this->username = $post['fusername'];
+        $this->nik = $post['fnik'];
         $this->password = $post['fpassword'];
         $this->deleted = 0;
         $this->db->update($this->_table, $this, array('id_user' => $post['fid_user']));

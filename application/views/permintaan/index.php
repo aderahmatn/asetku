@@ -57,20 +57,27 @@
                                             if ($key->status_permintaan == 'approved') {
                                                 echo '<span class="badge badge-pill badge-primary">Approved</span>';
                                             }
-                                            if ($key->status_permintaan == 'close') {
-                                                echo '<span class="badge badge-pill badge-success">Close</span>';
+                                            if ($key->status_permintaan == 'done') {
+                                                echo '<span class="badge badge-pill badge-success">Done</span>';
                                             }
-                                            ?></td>
+                                            ?>
+                                        </td>
                                         <td>
                                             <div class="btn-group">
+                                                <?php if ($key->status_permintaan != 'done') { ?>
+                                                    <?php if ($this->session->userdata('role') == 'admin') { ?>
+                                                        <a href="<?= base_url('detail/accept/') . $key->id_permintaan ?>"><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-check" data-tolltip="tooltip" data-placement="top" title="Accept"></i></button></a>
+                                                    <?php  } ?>
+                                                <?php  } ?>
+
                                                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail<?= $key->id_permintaan ?>" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye" data-tolltip="tooltip" data-placement="top" title="Detail"></i></button>
+
                                                 <?php if ($this->session->userdata('role') == 'user') { ?>
-                                                    <a href="<?= base_url('permintaan/edit/') . $key->id_permintaan ?>"><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
-
-
+                                                    <a href="<?= base_url('permintaan/edit/') . $key->id_permintaan ?>"><button type="button" class="btn btn-default btn-sm" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
                                                     <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'permintaan/delete/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                                 <?php } ?>
                                                 <?php if ($key->approve == 0) { ?>
+
                                                     <?php if ($this->session->userdata('role') == 'manager') { ?>
 
                                                         <button type="button" class="btn btn-default btn-sm" onclick="approveConfirm('<?= base_url() . 'permintaan/approve/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Approve"><i class="fas fa-check"></i></button>
@@ -84,23 +91,68 @@
                                     <div class="modal fade" id="modal-detail<?= $key->id_permintaan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h6 class="modal-title"><strong>Detail Permintaan</strong></h6>
+                                                </div>
                                                 <div class="modal-body">
-                                                    <strong>No Permintaan :</strong>
-                                                    <?= $key->no_permintaan ?> <br>
-                                                    <strong>Status :</strong>
-                                                    <?php if ($key->status_permintaan == 'hold') {
-                                                        echo '<span class="badge badge-pill badge-danger">Hold</span>';
-                                                    }
-                                                    if ($key->status_permintaan == 'approved') {
-                                                        echo '<span class="badge badge-pill badge-primary">Approved</span>';
-                                                    }
-                                                    if ($key->status_permintaan == 'close') {
-                                                        echo '<span class="badge badge-pill badge-success">Close</span>';
-                                                    } ?> <br>
-                                                    <strong>Approval By :</strong>
-                                                    <?= $key->approve_by == null ? '-' : ucwords($key->approve_by)   ?> <br>
-                                                    <strong>Deskripsi Permintaan :</strong><br>
-                                                    <p><?= $key->deskripsi_permintaan ?></p>
+                                                    <div class="row pb-2 bg-light">
+                                                        <div class="col-5"><strong>No Permintaan </strong></div>
+                                                        <div class="col-1">
+                                                            <strong>:</strong>
+                                                        </div>
+                                                        <div class="col-5"><?= $key->no_permintaan ?> <br></div>
+                                                    </div>
+                                                    <div class="row pb-2">
+                                                        <div class="col-5"> <strong>Status</strong>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <strong>:</strong>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <?php if ($key->status_permintaan == 'hold') { ?>
+                                                                <span class="badge badge-danger"><?= ucwords($key->status_permintaan) ?></span>
+                                                            <?php } ?>
+                                                            <?php if ($key->status_permintaan == 'approved') { ?>
+                                                                <span class="badge badge-primary"><?= ucwords($key->status_permintaan) ?></span>
+                                                            <?php } ?>
+                                                            <?php if ($key->status_permintaan == 'done') { ?>
+                                                                <span class="badge badge-success"><?= ucwords($key->status_permintaan) ?></span>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pb-2 bg-light">
+                                                        <div class="col-5"> <strong>Approval By</strong>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <strong>:</strong>
+                                                        </div>
+                                                        <div class="col-5"><?= $key->approve_by == null ? '-' : ucwords($key->approve_by)   ?></div>
+                                                    </div>
+                                                    <div class="row pb-2 ">
+                                                        <div class="col-5"> <strong>Kode Aset</strong>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <strong>:</strong>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <?php
+                                                            if ($key->kode_aset == null) {
+                                                                echo '-';
+                                                            } else {
+                                                                echo $key->kode_aset;
+                                                            }
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row pb-2 bg-light">
+                                                        <div class="col-5"> <strong>Deskripsi Permintaan</strong>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <strong>:</strong>
+                                                        </div>
+                                                        <div class="col-5"><?= $key->deskripsi_permintaan ?></div>
+                                                    </div>
+
                                                 </div>
                                                 <div class=" modal-footer">
                                                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

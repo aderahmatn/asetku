@@ -36,6 +36,13 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fnik">NIK</label>
+                        <input type="text" class="form-control <?= form_error('fnik') ? 'is-invalid' : '' ?>" id="fnik" name="fnik" placeholder="Enter NIK" value="<?= $user->nik ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fnik') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="fdepartemen">Departemen</label>
                         <select class="form-control <?php echo form_error('fdepartemen') ? 'is-invalid' : '' ?>" id="fdepartemen" name="fdepartemen">
                             <?php $dept = $this->input->post('fdepartemen') ? $this->input->post('fdepartemen') : $user->id_departemen  ?>
@@ -76,7 +83,8 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                    <button type="submit" class="btn btn-primary float-right">Update</button>
+                    <a href="<?= base_url('user') ?>" class="btn btn-secondary float-left">Batal</a>
                 </div>
             </form>
         </div>

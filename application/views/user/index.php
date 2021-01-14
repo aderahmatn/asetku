@@ -34,6 +34,7 @@
                                 <tr>
                                     <th style="width: 10px">No</th>
                                     <th>Nama Lengkap</th>
+                                    <th>NIK</th>
                                     <th>Departemen</th>
                                     <th>Username</th>
                                     <th>Level</th>
@@ -47,6 +48,7 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $key->nama_lengkap ?></td>
+                                        <td><?= $key->nik ?></td>
                                         <td><?= $key->departemen ?></td>
                                         <td><?= $key->username ?></td>
                                         <td><?= $key->role ?></td>

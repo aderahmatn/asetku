@@ -6,6 +6,7 @@ class Permintaan extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        check_not_login();
         $this->load->model('permintaan_m');
     }
     public function index()
@@ -15,7 +16,7 @@ class Permintaan extends CI_Controller
             $data['permintaan'] = $this->permintaan_m->get_all_by_dept($dept);
             $this->template->load('shared/index', 'permintaan/index', $data);
         } else {
-            $data['permintaan'] = $this->permintaan_m->get_all();
+            $data['permintaan'] = $this->permintaan_m->get_all_approved();
             $this->template->load('shared/index', 'permintaan/index', $data);
         }
     }

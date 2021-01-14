@@ -37,6 +37,8 @@
                 <!-- /.card-body -->
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                    <a href="<?= base_url('kategori') ?>" class="btn btn-secondary float-left">Batal</a>
+
                 </div>
             </form>
         </div>

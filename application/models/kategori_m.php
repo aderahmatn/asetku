@@ -44,10 +44,9 @@ class kategori_m extends CI_Model
     public function update($post)
     {
         $post = $this->input->post();
-        $this->id_kategori = $post['fid_kategori'];
-        $this->kategori = $post['fkategori'];
-        $this->deleted = 0;
-        $this->db->update($this->_table, $this, array('id_kategori' => $post['fid_kategori']));
+        $this->db->set('kategori', $post['fkategori']);
+        $this->db->where('id_kategori', $post['fid']);
+        $this->db->update($this->_table);
     }
 }
 

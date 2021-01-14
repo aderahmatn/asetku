@@ -35,26 +35,31 @@ class permintaan_m extends CI_Model
         $newnourut = $nomor + 1;
         return $newnourut;
     }
-    public function get_all()
+    public function get_all_approved()
     {
         $this->db->select('*');
         $this->db->join('user', 'user.id_user = permintaan.id_user');
         $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen');
+        $this->db->join('detail_aset', 'detail_aset.id_permintaan = permintaan.id_permintaan');
+        $this->db->join('aset', 'aset.id_aset = detail_aset.id_aset');
         $this->db->from($this->_table);
         $this->db->where('permintaan.deleted', 0);
-        $this->db->order_by('no_urut', 'desc');
+        $this->db->where('permintaan.status_permintaan!=',  'hold');
+        $this->db->order_by('permintaan.no_urut', 'desc');
         $query = $this->db->get();
         return $query->result();
     }
     public function get_all_by_dept($dept)
     {
-        $this->db->select('*');
+        $this->db->select('permintaan.*,aset.*, user.*, departemen.*');
         $this->db->join('user', 'user.id_user = permintaan.id_user');
         $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen');
+        $this->db->join('detail_aset', 'detail_aset.id_permintaan = permintaan.id_permintaan', 'left');
+        $this->db->join('aset', 'aset.id_aset = detail_aset.id_aset', 'left');
         $this->db->from($this->_table);
         $this->db->where('permintaan.deleted', 0);
         $this->db->where('permintaan.id_departemen', $dept);
-        $this->db->order_by('no_urut', 'desc');
+        $this->db->order_by('permintaan.no_urut', 'desc');
         $query = $this->db->get();
         return $query->result();
     }
@@ -103,6 +108,13 @@ class permintaan_m extends CI_Model
         $this->db->set('approve', 1);
         $this->db->set('status_permintaan', 'approved');
         $this->db->set('approve_by', $user);
+        $this->db->where('id_permintaan', $id);
+        $this->db->update('permintaan');
+    }
+    public function status_done($id)
+    {
+        $post = $this->input->post();
+        $this->db->set('status_permintaan', 'done');
         $this->db->where('id_permintaan', $id);
         $this->db->update('permintaan');
     }

@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <?php if ($this->session->userdata('role') == 'admin') { ?>
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'user' ? 'active' : '' ?><?= $this->uri->segment(1) == 'device' ? 'active' : '' ?><?= $this->uri->segment(1) == 'departemen' ? 'active' : '' ?><?= $this->uri->segment(1) == 'kategori' ? 'active' : '' ?>">
+                <a href="#" class="nav-link <?= $this->uri->segment(1) == 'user' ? 'active' : '' ?><?= $this->uri->segment(1) == 'aset' ? 'active' : '' ?><?= $this->uri->segment(1) == 'departemen' ? 'active' : '' ?><?= $this->uri->segment(1) == 'kategori' ? 'active' : '' ?>">
                   <i class="nav-icon fas fa-database"></i>
                   <p>
                     Data Master
@@ -108,9 +108,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="<?= base_url('device') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'device' ? 'active' : '' ?>">
+                    <a href="<?= base_url('aset') ?>" class="nav-link <?php echo $this->uri->segment(1) == 'aset' ? 'active' : '' ?>">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Data Device</p>
+                      <p>Data Aset</p>
                     </a>
                   </li>
                   <li class="nav-item">

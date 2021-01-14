@@ -7,6 +7,7 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        check_not_login();
         $this->load->model('user_m');
         $this->load->model('departemen_m');
     }
