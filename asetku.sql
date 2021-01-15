@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: asetku
--- Generation Time: 2021-01-14 7:30:05.4530 PM
+-- Generation Time: 2021-01-15 4:45:24.1030 PM
 -- -------------------------------------------------------------
 
 
@@ -53,6 +53,20 @@ CREATE TABLE `kategori` (
   `kategori` text,
   `deleted` int DEFAULT NULL,
   PRIMARY KEY (`id_kategori`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `perbaikan` (
+  `id_perbaikan` varchar(255) NOT NULL,
+  `id_aset` text,
+  `id_user` text,
+  `tanggal_perbaikan` date DEFAULT NULL,
+  `status_perbaikan` text,
+  `tanggal_close` date DEFAULT NULL,
+  `keterangan_perbaikan` text,
+  `tindakan_perbaikan` text,
+  `deleted` int DEFAULT NULL,
+  `pic_perbaikan` text,
+  PRIMARY KEY (`id_perbaikan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `permintaan` (
@@ -118,10 +132,17 @@ INSERT INTO `kategori` (`id_kategori`, `kategori`, `deleted`) VALUES
 ('kt-5ffecef7ea396', 'Printer', '0'),
 ('kt-5ffecf0d69e66', 'Komputer', '0');
 
+INSERT INTO `perbaikan` (`id_perbaikan`, `id_aset`, `id_user`, `tanggal_perbaikan`, `status_perbaikan`, `tanggal_close`, `keterangan_perbaikan`, `tindakan_perbaikan`, `deleted`, `pic_perbaikan`) VALUES
+('pbk-6000769bb6b9c', 'ast-5fff26a41cce8', 'user-5ffc8cc362a33', '2021-01-14', 'close', NULL, 'kamera ngeblur dan lensa berjamur', 'ganti lensa', '0', 'ade rahmat nurdiyana'),
+('pbk-600076ee9743b', 'ast-5fff26a41cce8', 'user-5ffc8cc362a33', '2021-01-14', 'open', NULL, 'wesxdrcfvgybhunjm', NULL, '1', NULL),
+('pbk-60007c509dcef', 'ast-5fff2651f2338', 'user-5ffe2b25c5809', '2021-01-14', 'close', '2021-01-14', 'kibotnya pada copot dan lcdnya gelap', 'ganti kibot dan ganti lcd', '0', 'ade rahmat nurdiyana'),
+('pbk-600095c8b0d66', 'ast-5fff2651f2338', 'user-5ffe2b25c5809', '2021-01-14', 'close', '2021-01-14', 'adasdnm', 'iuyuyiy', '0', 'ade rahmat nurdiyana');
+
 INSERT INTO `permintaan` (`id_permintaan`, `id_user`, `tanggal_permintaan`, `approve`, `status_permintaan`, `deleted`, `id_departemen`, `deskripsi_permintaan`, `no_permintaan`, `no_urut`, `approve_by`) VALUES
 ('req-5fff3446a940e', 'user-5ffe2b25c5809', '2021-01-13', '1', 'done', '0', 'dep-asdasmk', 'laptop untuk kebutuhan design produk', 'REQ130121001', '1', 'maman'),
 ('req-5fff3601c7453', 'user-5ffc8cc362a33', '2021-01-13', '1', 'done', '0', 'dept-5ff5c1c090f1b', 'cctv untuk pemantauan berangkas uang', 'REQ130121002', '2', 'udin bahrudin'),
-('req-5fff40e49fa18', 'user-5ffc8cc362a33', '2021-01-13', '0', 'hold', '0', 'dept-5ff5c1c090f1b', 'mnbv', 'REQ130121003', '3', NULL);
+('req-5fff40e49fa18', 'user-5ffc8cc362a33', '2021-01-13', '1', 'approved', '0', 'dept-5ff5c1c090f1b', 'mnbv', 'REQ130121003', '3', 'udin bahrudin'),
+('req-60003fbced748', 'user-5ffe2b25c5809', '2021-01-14', '1', 'approved', '0', 'dep-asdasmk', 'mobil', 'REQ140121004', '4', 'maman');
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `id_departemen`, `username`, `password`, `role`, `deleted`, `nik`) VALUES
 ('user-5ff5ca7d9e428', 'KXfCRgDenO', 'dept-5ff5c1c090f1b', 'lDAZlvNDEo', 'ff203dfaa9d731d437093c33d5c0c1c3', 'manager it', '1', '345435'),
