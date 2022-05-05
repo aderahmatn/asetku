@@ -116,6 +116,19 @@ class perbaikan_m extends CI_Model
         $this->db->where('id_perbaikan', $id);
         $this->db->update($this->_table);
     }
+    public function get_by_aset($id)
+    {
+        $this->db->select('*');
+        $this->db->join('user', 'user.id_user = perbaikan.id_user');
+        $this->db->join('departemen', 'departemen.id_departemen = user.id_departemen');
+        $this->db->join('aset', 'aset.id_aset = perbaikan.id_aset', 'left');
+        $this->db->from($this->_table);
+        $this->db->where('perbaikan.deleted', 0);
+        $this->db->where('perbaikan.id_aset', $id);
+        $this->db->order_by('perbaikan.tanggal_perbaikan', 'desc');
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
 
 /* End of file perbaikan_m.php */

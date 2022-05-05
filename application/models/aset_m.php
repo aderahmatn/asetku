@@ -54,6 +54,7 @@ class aset_m extends CI_Model
         $this->db->join('departemen', 'departemen.id_departemen = permintaan.id_departemen', 'left');
         $this->db->from($this->_table);
         $this->db->where('aset.deleted', 0);
+        $this->db->where('aset.status_aset !=', 'damage');
         $this->db->where('permintaan.id_departemen', $this->session->userdata('id_departemen'));
         $query = $this->db->get();
         return $query->result();
@@ -83,7 +84,15 @@ class aset_m extends CI_Model
     }
     public function get_by_id($id)
     {
-        return $this->db->get_where($this->_table, ["id_aset" => $id])->row();
+        $this->db->select('*');
+        $this->db->join('detail_aset', 'detail_aset.id_aset = aset.id_aset', 'left');
+        $this->db->join('permintaan', 'permintaan.id_permintaan = detail_aset.id_permintaan', 'left');
+        $this->db->join('user', 'user.id_user = permintaan.id_user', 'left');
+        $this->db->join('departemen', 'departemen.id_departemen = user.id_departemen', 'left');
+        $this->db->from($this->_table);
+        $this->db->where('aset.id_aset', $id);
+        $query = $this->db->get();
+        return $query->row();
     }
     public function add()
     {
@@ -103,6 +112,12 @@ class aset_m extends CI_Model
     public function Delete($id)
     {
         $this->db->set('deleted', 1);
+        $this->db->where('id_aset', $id);
+        $this->db->update($this->_table);
+    }
+    public function damage($id)
+    {
+        $this->db->set('status_aset', 'damage');
         $this->db->where('id_aset', $id);
         $this->db->update($this->_table);
     }

@@ -76,6 +76,11 @@
 
 
                                                 <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'aset/delete/' . $key->id_aset ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
+
+                                                <?php if ($key->status_aset != 'damage') { ?>
+                                                    <button type="button" class="btn btn-default btn-sm" onclick="damageConfirm('<?= base_url() . 'aset/damage/' . $key->id_aset ?>')" data-tolltip="tooltip" data-placement="top" title="Damage"><i class="fas fa-times"></i></button>
+                                                <?php } ?>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -138,6 +143,10 @@
                                                         </div>
                                                         <div class="col-5"><?= $key->deskripsi_permintaan ?></div>
                                                     </div>
+                                                    <div class="row pb-2">
+                                                        <div class="col-5"> <strong><a href="<?= base_url('aset/history/') . $key->id_aset ?>">[Histori Perbaikan]</a></strong>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class=" modal-footer">
@@ -199,11 +208,39 @@
         </div>
     </div>
 </div>
+<!--Damage Confirmation-->
+<div class="modal fade" id="damageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-3 d-flex justify-content-center">
+                        <i class="fa  fa-times" style="font-size: 70px; color:red;"></i>
+                    </div>
+                    <div class="col-9 pt-2">
+                        <h5>Apakah anda yakin?</h5>
+                        <span>Anda akan merubah status aset menjadi <mark>Damage</mark></span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" data-dismiss="modal"> Batal</button>
+                <a id="btn-damage" class="btn btn-danger" href="#"> Damage</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Delete Confirm -->
 <script type="text/javascript">
     function deleteConfirm(url) {
         $('#btn-delete').attr('href', url);
         $('#deleteModal').modal();
+    }
+
+    function damageConfirm(url) {
+        $('#btn-damage').attr('href', url);
+        $('#damageModal').modal();
     }
 </script>

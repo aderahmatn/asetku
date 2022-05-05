@@ -45,6 +45,7 @@ class permintaan_m extends CI_Model
         $this->db->from($this->_table);
         $this->db->where('permintaan.deleted', 0);
         $this->db->where('permintaan.status_permintaan!=',  'hold');
+        $this->db->where('permintaan.status_permintaan!=',  'reject');
         $this->db->order_by('permintaan.no_urut', 'desc');
         $query = $this->db->get();
         return $query->result();
@@ -107,6 +108,15 @@ class permintaan_m extends CI_Model
         $user = $this->session->userdata('nama_lengkap');
         $this->db->set('approve', 1);
         $this->db->set('status_permintaan', 'approved');
+        $this->db->set('approve_by', $user);
+        $this->db->where('id_permintaan', $id);
+        $this->db->update('permintaan');
+    }
+    public function reject($id)
+    {
+        $user = $this->session->userdata('nama_lengkap');
+        $this->db->set('approve', 1);
+        $this->db->set('status_permintaan', 'reject');
         $this->db->set('approve_by', $user);
         $this->db->where('id_permintaan', $id);
         $this->db->update('permintaan');

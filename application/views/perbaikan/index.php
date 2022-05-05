@@ -69,10 +69,13 @@
                                                 <?php  } ?>
 
                                                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail<?= $key->id_perbaikan ?>" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye" data-tolltip="tooltip" data-placement="top" title="Detail"></i></button>
+                                                <?php if ($key->status_perbaikan != 'close') { ?>
+                                                    <?php if ($this->session->userdata('role') == 'user') { ?>
+                                                        <a href="<?= base_url('perbaikan/edit/') . $key->id_perbaikan ?>"><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
+                                                        <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'perbaikan/delete/' . $key->id_perbaikan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                                    <?php } ?>
+                                                <?php } ?>
 
-                                                <a href="<?= base_url('perbaikan/edit/') . $key->id_perbaikan ?>"><button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal-detail" data-tolltip="tooltip" data-placement="top" <button type="button" class="btn btn-default btn-sm"><i class="fas fa-pencil-alt" data-tolltip="tooltip" data-placement="top" title="Edit"></i></button></a>
-
-                                                <button type="button" class="btn btn-default btn-sm" onclick="deleteConfirm('<?= base_url() . 'perbaikan/delete/' . $key->id_perbaikan ?>')" data-tolltip="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -120,28 +123,28 @@
                                                         </div>
                                                         <div class="col-5"><?= ucwords($key->nama_lengkap) ?> <br></div>
                                                     </div>
-                                                    <div class="row pb-2 bg-light">
+                                                    <div class="row pb-2 ">
                                                         <div class="col-5"><strong>Departemen</strong></div>
                                                         <div class="col-1">
                                                             <strong>:</strong>
                                                         </div>
                                                         <div class="col-5"><?= ucwords($key->departemen) ?> <br></div>
                                                     </div>
-                                                    <div class="row pb-2 ">
+                                                    <div class="row pb-2 bg-light">
                                                         <div class="col-5"><strong>Keluhan</strong></div>
                                                         <div class="col-1">
                                                             <strong>:</strong>
                                                         </div>
                                                         <div class="col-5"><?= ucfirst($key->keterangan_perbaikan) ?> <br></div>
                                                     </div>
-                                                    <div class="row pb-2 bg-light">
+                                                    <div class="row pb-2 ">
                                                         <div class="col-5"><strong>PIC Perbaikan</strong></div>
                                                         <div class="col-1">
                                                             <strong>:</strong>
                                                         </div>
                                                         <div class="col-5"><?= ucfirst($key->pic_perbaikan) ?> <br></div>
                                                     </div>
-                                                    <div class="row pb-2">
+                                                    <div class="row pb-2 bg-light">
                                                         <div class="col-5"><strong>Tindakan Perbaikan</strong></div>
                                                         <div class="col-1">
                                                             <strong>:</strong>

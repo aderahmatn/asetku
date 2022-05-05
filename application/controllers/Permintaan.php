@@ -79,6 +79,14 @@ class Permintaan extends CI_Controller
             redirect('permintaan', 'refresh');
         }
     }
+    public function reject($id)
+    {
+        $this->permintaan_m->reject($id);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Permintaan berhasil direject!');
+            redirect('permintaan', 'refresh');
+        }
+    }
 }
 
 /* End of file Permintaan.php */

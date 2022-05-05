@@ -10,6 +10,7 @@ class Aset extends CI_Controller
         check_not_login();
         $this->load->model('aset_m');
         $this->load->model('kategori_m');
+        $this->load->model('perbaikan_m');
     }
     public function index()
     {
@@ -62,11 +63,30 @@ class Aset extends CI_Controller
             }
         }
     }
+    public function history($id)
+    {
+        $data['aset'] = $this->aset_m->get_by_id($id);
+        $data['perbaikan'] = $this->perbaikan_m->get_by_aset($id);
+        if (!$data['perbaikan']) {
+            $this->session->set_flashdata('error', 'Data perbaikan tidak ditemukan!');
+            redirect('aset', 'refresh');
+        }
+        // echo json_encode($data['perbaikan']);
+        $this->template->load('shared/index', 'aset/history', $data);
+    }
     public function delete($id)
     {
         $this->aset_m->Delete($id);
         if ($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data aset berhasil dihapus!');
+            redirect('aset', 'refresh');
+        }
+    }
+    public function damage($id)
+    {
+        $this->aset_m->damage($id);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Status aset berhasil diupdate!');
             redirect('aset', 'refresh');
         }
     }

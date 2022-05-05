@@ -52,13 +52,16 @@
                                         <td><?= $key->departemen ?></td>
                                         <td><?php
                                             if ($key->status_permintaan == 'hold') {
-                                                echo '<span class="badge badge-pill badge-danger">Hold</span>';
+                                                echo '<span class="badge badge-pill badge-warning">Hold</span>';
                                             }
                                             if ($key->status_permintaan == 'approved') {
                                                 echo '<span class="badge badge-pill badge-primary">Approved</span>';
                                             }
                                             if ($key->status_permintaan == 'done') {
                                                 echo '<span class="badge badge-pill badge-success">Done</span>';
+                                            }
+                                            if ($key->status_permintaan == 'reject') {
+                                                echo '<span class="badge badge-pill badge-danger">Rejected</span>';
                                             }
                                             ?>
                                         </td>
@@ -81,6 +84,7 @@
                                                 <?php if ($key->approve == 0) { ?>
                                                     <?php if ($this->session->userdata('role') == 'manager') { ?>
                                                         <button type="button" class="btn btn-default btn-sm" onclick="approveConfirm('<?= base_url() . 'permintaan/approve/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Approve"><i class="fas fa-check"></i></button>
+                                                        <button type="button" class="btn btn-default btn-sm" onclick="rejectConfirm('<?= base_url() . 'permintaan/reject/' . $key->id_permintaan ?>')" data-tolltip="tooltip" data-placement="top" title="Reject"><i class="fas fa-times"></i></button>
                                                     <?php  } ?>
                                                 <?php  } ?>
                                             </div>
@@ -230,8 +234,31 @@
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default" type="button" data-dismiss="modal"> Batal</button>
+                <button class="btn btn-default float-left" type="button" data-dismiss="modal"> Batal</button>
                 <a id="btn-approve" class="btn btn-primary" href="#"> Approve</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal reject-->
+<div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-3 d-flex justify-content-center">
+                        <i class="fa  fa-times" style="font-size: 70px; color:red;"></i>
+                    </div>
+                    <div class="col-9 pt-2">
+                        <h5>Apakah anda yakin?</h5>
+                        <span>akan reject permintaan ini!</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default float-left" type="button" data-dismiss="modal"> Batal</button>
+                <a id="btn-reject" class="btn btn-danger" href="#"> Reject</a>
             </div>
         </div>
     </div>
@@ -246,5 +273,10 @@
     function approveConfirm(url) {
         $('#btn-approve').attr('href', url);
         $('#approveModal').modal();
+    }
+
+    function rejectConfirm(url) {
+        $('#btn-reject').attr('href', url);
+        $('#rejectModal').modal();
     }
 </script>
