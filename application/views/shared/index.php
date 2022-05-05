@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Asetku</title>
+  <title>Asetku - cihuy</title>
 
   <link rel="icon" href="<?= base_url("assets/images/logo.png") ?>" type="image/jpeg">
   <!-- Font Awesome Icons -->
@@ -63,7 +63,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="info">
             <a href="#" class="d-block"><?= ucwords($this->session->userdata('nama_lengkap')) ?> </a>
             <p><span class="mb-0 badge badge-light"><?= ucwords($this->session->userdata('role')) ?></span>
-              <span class="mb-0 badge badge-light"><?= $this->session->userdata('departemen') ?></span></p>
+              <span class="mb-0 badge badge-light"><?= $this->session->userdata('departemen') ?></span>
+            </p>
           </div>
         </div>
 
