@@ -147,6 +147,10 @@
                                                         <div class="col-5"> <strong><a href="<?= base_url('aset/history/') . $key->id_aset ?>">[Histori Perbaikan]</a></strong>
                                                         </div>
                                                     </div>
+                                                    <div class="row pb-2">
+                                                        <div class="col-5"> <strong><a href="<?= base_url('aset/showBarcode/') . $key->kode_aset ?>">[Cetak Barcode]</a></strong>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                                 <div class=" modal-footer">

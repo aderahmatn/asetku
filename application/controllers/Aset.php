@@ -90,6 +90,20 @@ class Aset extends CI_Controller
             redirect('aset', 'refresh');
         }
     }
+    public function showBarcode($code)
+    {
+        $data['code'] = $code;
+        $this->load->view('aset/barcode', $data);
+    }
+    public function set_barcode($code)
+    {
+        //load library
+        $this->load->library('zend');
+        //load in folder Zend
+        $this->zend->load('Zend/Barcode');
+        //generate barcode
+        Zend_Barcode::render('code128', 'image', array('text' => $code, 'barHeight' => 100), array());
+    }
 }
 
 /* End of file Aset.php */
