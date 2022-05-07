@@ -9,8 +9,10 @@ class Aset extends CI_Controller
         parent::__construct();
         check_not_login();
         $this->load->model('aset_m');
+        $this->load->model('detail_m');
         $this->load->model('kategori_m');
         $this->load->model('perbaikan_m');
+        include_once APPPATH . '/third_party/fpdf/code128.php';
     }
     public function index()
     {
@@ -20,6 +22,7 @@ class Aset extends CI_Controller
     public function create()
     {
         $aset  = $this->aset_m;
+        $detail  = $this->detail_m;
         $validation = $this->form_validation;
         $validation->set_rules($aset->rules());
         if ($validation->run() == FALSE) {
@@ -29,6 +32,7 @@ class Aset extends CI_Controller
         } else {
             $post = $this->input->post(null, TRUE);
             $aset->Add($post);
+            $detail->Add($post);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Data aset berhasil disimpan!');
                 redirect('aset', 'refresh');
@@ -59,7 +63,7 @@ class Aset extends CI_Controller
                 redirect('aset', 'refresh');
             } else {
                 $this->session->set_flashdata('warning', 'Data aset tidak ada yang diupdate!');
-                redirect('aset', 'refresh');
+                // redirect('aset', 'refresh');
             }
         }
     }
@@ -93,7 +97,8 @@ class Aset extends CI_Controller
     public function showBarcode($code)
     {
         $data['code'] = $code;
-        $this->load->view('aset/barcode', $data);
+
+        $this->load->view('aset/pdf_barcode', $data);
     }
     public function set_barcode($code)
     {
@@ -101,6 +106,7 @@ class Aset extends CI_Controller
         $this->load->library('zend');
         //load in folder Zend
         $this->zend->load('Zend/Barcode');
+
         //generate barcode
         Zend_Barcode::render('code128', 'image', array('text' => $code, 'barHeight' => 100), array());
     }

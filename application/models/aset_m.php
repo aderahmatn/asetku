@@ -15,6 +15,10 @@ class aset_m extends CI_Model
     public $no_urut;
     public $id_kategori;
     public $status_aset;
+    public $serial_number;
+    public $merk;
+    public $harga_beli;
+    public $site;
 
     public function rules()
     {
@@ -42,6 +46,26 @@ class aset_m extends CI_Model
             [
                 'field' => 'fkategori',
                 'label' => 'Kategori aset',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fserial_number',
+                'label' => 'Serial Number aset',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fmerk',
+                'label' => 'Merk aset',
+                'rules' => 'required'
+            ],
+            [
+                'field' => 'fharga_beli',
+                'label' => 'Harga beli',
+                'rules' => 'required|numeric'
+            ],
+            [
+                'field' => 'fsite',
+                'label' => 'Site',
                 'rules' => 'required'
             ],
         ];
@@ -97,11 +121,15 @@ class aset_m extends CI_Model
     public function add()
     {
         $post = $this->input->post();
-        $this->id_aset = uniqid('ast-');
+        $this->id_aset = $post['fid_aset'];
         $this->kode_aset = $post['fkode_aset'];
         $this->nama_aset = $post['fnama_aset'];
         $this->tanggal_pembelian = $post['ftgl_pembelian'];
         $this->supplier = $post['fsupplier'];
+        $this->serial_number = $post['fserial_number'];
+        $this->merk = $post['fmerk'];
+        $this->harga_beli = $post['fharga_beli'];
+        $this->site = $post['fsite'];
         $this->deskripsi = $post['fdeskripsi'];
         $this->no_urut = $this->CheckNoUrut();
         $this->id_kategori = $post['fkategori'];
@@ -135,6 +163,10 @@ class aset_m extends CI_Model
         $this->nama_aset = $post['fnama_aset'];
         $this->tanggal_pembelian = $post['ftgl_pembelian'];
         $this->supplier = $post['fsupplier'];
+        $this->serial_number = $post['fserial_number'];
+        $this->merk = $post['fmerk'];
+        $this->harga_beli = $post['fharga_beli'];
+        $this->site = $post['fsite'];
         $this->deskripsi = $post['fdeskripsi'];
         $this->id_kategori = $post['fkategori'];
         $this->no_urut = $post['fno'];

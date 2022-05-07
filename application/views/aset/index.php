@@ -34,11 +34,14 @@
                                 <tr>
                                     <th style="width: 10px">No</th>
                                     <th>Kode aset</th>
+                                    <th>SN</th>
+                                    <th>Merk</th>
                                     <th>Nama aset</th>
+                                    <th>Harga Beli</th>
                                     <th>Kategori</th>
-                                    <th>Deskripsi</th>
-                                    <th>Tgl Pembelian</th>
-                                    <th>Suplier</th>
+                                    <th>Site</th>
+
+
                                     <th>Status</th>
                                     <th style="width: 10px">Modify</th>
                                 </tr>
@@ -50,11 +53,14 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $key->kode_aset ?></td>
+                                        <td><?= $key->serial_number ?></td>
+                                        <td><?= $key->merk ?></td>
                                         <td><?= $key->nama_aset ?></td>
+                                        <td><?= $key->harga_beli ?></td>
                                         <td><?= $key->kategori ?></td>
-                                        <td><?= $key->deskripsi ?></td>
-                                        <td><?= $key->tanggal_pembelian ?></td>
-                                        <td><?= $key->supplier ?></td>
+                                        <td><?= $key->site ?></td>
+
+
                                         <td>
                                             <?php
                                             if ($key->status_aset == 'idle') {
@@ -148,7 +154,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row pb-2">
-                                                        <div class="col-5"> <strong><a href="<?= base_url('aset/showBarcode/') . $key->kode_aset ?>">[Cetak Barcode]</a></strong>
+                                                        <div class="col-5"> <strong><a href="<?= base_url('aset/showBarcode/') . $key->kode_aset ?>" target="_blank">[Cetak Barcode]</a></strong>
                                                         </div>
                                                     </div>
 

@@ -24,12 +24,9 @@ class detail_m extends CI_Model
     public function add($id)
     {
         $post = $this->input->post();
-        $this->id_detail = uniqid('dt-');
-        $this->id_aset = $post['fid_aset'];
-        $this->id_permintaan = $id;
-        $this->tanggal = date('Y-m-d');
-        $this->pic_admin = $this->session->userdata('nama_lengkap');
-        $this->db->insert($this->_table, $this);
+        $this->db->set('id_permintaan', $id);
+        $this->db->where('id_aset', $post['fid_aset']);
+        $this->db->update($this->_table);
     }
 }
 

@@ -7,7 +7,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="<?= base_url('alat') ?>">Data aset</a></li>
+                    <li class="breadcrumb-item"><a href="<?= base_url('aset') ?>">Data aset</a></li>
                     <li class="breadcrumb-item active">Tambah Data aset</li>
                 </ol>
             </div>
@@ -24,12 +24,21 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form role="form" method="POST" action="" autocomplete="off">
+                <input type="hidden" name="fid_aset" style="display: none" value="<?= uniqid('ast-') ?>">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="fkode_aset">Kode aset</label>
-                        <input type="text" class="form-control <?= form_error('fkode_aset') ? 'is-invalid' : '' ?>" id="fkode_aset" name="fkode_aset" placeholder="Enter Kode Alat" value="<?= 'AST' . date('dmY') . sprintf("%03s", $no_urut) ?>" readonly>
+                        <input type="text" class="form-control <?= form_error('fkode_aset') ? 'is-invalid' : '' ?>" id="fkode_aset" name="fkode_aset" placeholder="Enter Kode Alat" value="<?= 'GSK' . date('dmY') . sprintf("%03s", $no_urut) ?>" readonly>
                         <div class="invalid-feedback">
                             <?= form_error('fkode_aset') ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fserial_number">Serial Number</label>
+                        <input type="text" class="form-control <?= form_error('fserial_number') ? 'is-invalid' : '' ?>" id="fserial_number" name="fserial_number" placeholder="Enter Serial Number" value="<?= $this->input->post('fserial_number'); ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fserial_number') ?>
                         </div>
                     </div>
                     <div class="form-group">
@@ -40,10 +49,38 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="fmerk">Merk</label>
+                        <input type="text" class="form-control <?= form_error('fmerk') ? 'is-invalid' : '' ?>" id="fmerk" name="fmerk" placeholder="Enter Merk" value="<?= $this->input->post('fmerk'); ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fmerk') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fharga_beli">Harga Beli</label>
+                        <input type="text" class="form-control <?= form_error('fharga_beli') ? 'is-invalid' : '' ?>" id="fharga_beli" name="fharga_beli" placeholder="Enter Harga Beli" value="<?= $this->input->post('fharga_beli'); ?>">
+                        <div class="invalid-feedback">
+                            <?= form_error('fharga_beli') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="ftgl_pembelian">Tanggal Pembelian</label>
                         <input type="date" class="form-control <?= form_error('ftgl_pembelian') ? 'is-invalid' : '' ?>" id="ftgl_pembelian" name="ftgl_pembelian" value="<?= $this->input->post('ftgl_pembelian'); ?>">
                         <div class="invalid-feedback">
                             <?= form_error('ftgl_pembelian') ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fsite">Site</label>
+                        <select class="form-control <?php echo form_error('fsite') ? 'is-invalid' : '' ?>" id="fsite" name="fsite">
+                            <option hidden value="" selected>Pilih Site</option>
+                            <option value="SDK">SDK</option>
+                            <option value="CGS">CGS</option>
+                            <option value="MJT">MJT</option>
+                            <option value="MJA">MJA</option>
+                            <option value="JTP">JTP</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= form_error('fsite') ?>
                         </div>
                     </div>
                     <div class="form-group">
